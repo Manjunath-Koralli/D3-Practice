@@ -1,7 +1,8 @@
 <html>
   <head>
     <title>D3 Static-Chart eaxample</title>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
   </head>
   <body>
     <h1>Smart Phones</h1>
@@ -44,11 +45,11 @@
 
       d3.selectAll(".items li")
         .data(styles)
-        .style({
+        .styles({
           "font-size": "18px",
           padding: "6px",
           margin: "4px",
-          "list-style": none,
+          "list-style": "none",
           background: function (d) {
             return d.background;
           },
