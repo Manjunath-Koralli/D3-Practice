@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Second D3 eaxample</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <style>
+      .big {
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="item_1">
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+    </ul>
+
+    <ul class="item_2">
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+    </ul>
+
+    <script>
+      var numArray = [7, 13, 14, 21, 22];
+      var numArray1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+      var li = d3
+        .select("body")
+        .selectAll(".item_1 li")
+        .data(numArray1)
+        .text(function (d) {
+          return "This is item number " + d;
+        });
+
+      li.enter()
+        .append("li")
+        .text(function (d) {
+          return "This is item number " + d;
+        });
+
+      li.exit().remove();
+
+      d3.selectAll(".item_2 li")
+        .data(numArray)
+        .style("font-size", function (d) {
+          return d + "px";
+        });
+    </script>
+  </body>
+</html>

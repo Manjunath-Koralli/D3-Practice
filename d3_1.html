@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>First D3 eaxample</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <style>
+      .big {
+        font-size: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="items">
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+      <li>
+        This is li
+      </li>
+    </ul>
+
+    <script>
+      d3.selectAll("li:nth-child(even)")
+        .style("color", "red")
+        .html("This is even number")
+        .classed("big", true);
+    </script>
+  </body>
+</html>
