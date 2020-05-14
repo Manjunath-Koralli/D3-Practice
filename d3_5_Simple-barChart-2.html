@@ -8,9 +8,20 @@
     <div id="chart"></div>
 
     <script>
-      var myData = [100, 125, 320, 440, 500];
+      var myData = [100, 125, 320, 440, 500, 250, 320, 720, 50, 300, 400, 500];
       var height = 500;
       var width = 500;
+      var animateDuration = 700;
+      var animateDelay = 300;
+      //console.log(myData.length);
+      var tooltip = d3.select("body").append("div");
+      tooltip
+        .style("position", "absolute")
+        .style("background", "#f4f4f4")
+        .style("padding", "5 15px")
+        .style("border", "1px #333 solid")
+        .style("border-radius", "5px")
+        .style("opacity", "0");
 
       var yScale = d3
         .scaleLinear()
@@ -27,7 +38,7 @@
       colorScale.range(["#90ee90", "#30c230"]);
 
       var myChart = d3
-        .selectAll("#chart")
+        .select("#chart")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -45,12 +56,41 @@
         .attr("height", function (d) {
           return yScale(d);
         })
+        //.attr("height", 0)
         .attr("x", function (d, i) {
           return xScale(i);
         })
         .attr("y", function (d) {
           return height - yScale(d);
+        })
+        //.attr("y", height)
+        .on("mouseover", function (d) {
+          tooltip.transition().style("opacity", 1);
+
+          tooltip
+            .html(d)
+            .style("left", d3.event.pageX + "px")
+            .style("top", d3.event.pageY + "px");
+          d3.select(this).style("opacity", 0);
+        })
+        .on("mouseout", function (d) {
+          tooltip.transition().style("opacity", 0);
+          d3.select(this).style("opacity", 1);
         });
+
+      myChart
+        .transition()
+        /*.attr("height", function (d) {
+          return yScale(d);
+        })
+        .attr("y", function (d) {
+          return height - yScale(d);
+        })*/
+        .duration(animateDuration)
+        .delay(function (d, i) {
+          return i * animateDelay;
+        })
+        .ease(d3.easeElastic);
     </script>
   </body>
 </html>
